@@ -1,0 +1,96 @@
+<md-dialog aria-label="">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 id="status-device-name"></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="ic_close_white_24px.svg" aria-label="Chiudi"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width:200px;min-height:200px;max-width:800px;max-height:810px;padding-top: 50px;text-align: center;"
+                           class="status-content">
+            <p style="height: 50px;" id="status-progress"><md-progress-circular class="md-hue-2" md-diameter="30px"></md-progress-circular></p>
+            <p id="status-work" class="md-body-2">Sto recuperando le informazioni...</p>
+            <p style="display: none;" id="status-error" class="md-body-2">Sto riscontrando dei problemi...<br>Se persistono contatta l'amministratore.</p>
+            <p style="display: none;" id="status-errorM" class="md-body-2"></p>
+            <md-tabs md-dynamic-height md-border-bottom style="display: none;" id="status-tabs">
+                <md-tab label="Status">
+                    <md-content class="md-padding">
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-status"></h4>
+
+                            <p class="list-group-item-text">STATUS</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-desc"></h4>
+
+                            <p class="list-group-item-text">DESCRIZIONE</p>
+                        </li>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Sensori">
+                    <md-content class="md-padding">
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-tempin"></h4>
+
+                            <p class="list-group-item-text">TEMPERATURA INTERNA</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-tempes"></h4>
+
+                            <p class="list-group-item-text">TEMPERATURA ESTERNA</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-umin"></h4>
+
+                            <p class="list-group-item-text">UMIDIT&Agrave; INTERNA</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-umes"></h4>
+
+                            <p class="list-group-item-text">UMIDIT&Agrave; ESTERNA</p>
+                        </li>
+                    </md-content>
+                </md-tab>
+                <md-tab label="Informazioni">
+                    <md-content class="md-padding">
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-id"></h4>
+
+                            <p class="list-group-item-text">ID DISPOSITIVO</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-idunico"></h4>
+
+                            <p class="list-group-item-text">ID UNICO</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-luogo"></h4>
+
+                            <p class="list-group-item-text">LUOGO</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-ippr"></h4>
+
+                            <p class="list-group-item-text">IP PRIVATO</p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4 class="list-group-item-heading" id="status-device-ippu"></h4>
+
+                            <p class="list-group-item-text">IP PUBBLICO</p>
+                        </li>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span class="md-body-2" id="status-update"></span>
+            <span flex></span>
+            <md-button ng-click="cancel()" style="margin-right:20px;">
+                Chiudi
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

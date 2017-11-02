@@ -1,0 +1,1 @@
+echo "TEST LANCIO SCRIPT"

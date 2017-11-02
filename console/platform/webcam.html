@@ -1,0 +1,37 @@
+<md-dialog aria-label="">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 id="webcam-device-name"></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="ic_close_white_24px.svg" aria-label="Chiudi"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="min-width:200px;min-height:200px;max-width:800px;max-height:810px;padding-top: 50px;text-align: center;"
+                           class="webcam-content">
+            <p style="height: 50px;" id="webcam-progress">
+                <md-progress-circular class="md-hue-2" md-diameter="30px"></md-progress-circular>
+            </p>
+            <p id="webcam-work" class="md-body-2">Mi collego alla webcam...</p>
+
+            <p style="display: none;" id="webcam-error" class="md-body-2">Sto riscontrando dei problemi...<br>Se persistono contatta l'amministratore.</p>
+
+            <p style="display: none;" id="webcam-errorM" class="md-body-2"></p>
+            <md-tabs md-dynamic-height md-border-bottom style="display: none;" id="webcam-tabs">
+                <md-tab label="Foto">
+                    <md-content class="md-padding" id="webcam-tab-photo"></md-content>
+                </md-tab>
+                <!--<md-tab label="Video">
+                    <md-content class="md-padding" id="webcam-tab-video"></md-content>
+                </md-tab>-->
+            </md-tabs>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()" style="margin-right:20px;">
+                Chiudi
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

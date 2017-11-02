@@ -1,0 +1,40 @@
+<md-dialog aria-label="">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 id="telecomando-device-name"></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="ic_close_white_24px.svg" aria-label="Chiudi"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content
+                style="min-width:200px;min-height:200px;max-height:810px;padding-top: 50px;text-align: center;"
+                class="telecomando-content">
+            <p style="height: 50px;" id="telecomando-progress">
+                <md-progress-circular class="md-hue-2" md-diameter="30px"></md-progress-circular>
+            </p>
+            <p id="telecomando-work" class="md-body-2">Preparo il telecomando...</p>
+
+            <p style="display: none;" id="telecomando-error" class="md-body-2">Sto riscontrando dei
+                problemi...<br>Se
+                persistono contatta l'amministratore.
+            </p>
+
+            <p style="display: none;" id="telecomando-errorM" class="md-body-2"></p>
+            <div id="telecomando" style="display: none;padding-left: 15px;padding-right: 15px;">
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()" style="">
+                Chiudi
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="pippo()" style="margin-right:20px;display: none;" id="schedulazione-add-button">
+                Crea
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

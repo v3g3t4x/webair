@@ -1,0 +1,25 @@
+
+***** DA TESTARE *****
+-SetScheduling: prima di salvare devo verificare se il deviceId è veramente di questo utente (fatto da testare)
+
+
+***** DA FARE *****
+-Creare API change password con invio mail di conferma [MARCO]
+
+-scrivere i comandi SH
+
+-SetScheduling prima di salvare deve verificare che la programmazione sia consistente.
+
+-mettere trigger su creationdate e updatedate in tutte le tabelle
+
+-Nuova API: GetConnection.php ora è solo stub.[MARCO]
+
+-Sistemare controllo crypt su setstatus e sendcommand [MARCO]
+
+-scrivere la daoreport per fare grafici di temperatura interna: AIR_REPORT meglio mettere tutti i campi su una riga??? (INTERNAL_TEMP, INTERNAL_HUM, EXTERNAL_TEMP, EXTERNAL_HUM)
+
+-Lo script di esecuzione sulla raspberry va modificato, se non c'è connessione si blocca e non fa partire nulla. Va prima controllata connessione [RUBEN]
+
+
+**** DA FARE BASSA PRIORITA' ****
+-status dao recuperare simboli da config su db tempSymbol e humSymbol [MARCO, BASSA PRIORITA]

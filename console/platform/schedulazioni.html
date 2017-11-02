@@ -1,0 +1,51 @@
+<md-dialog aria-label="">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 id="schedulazioni-device-name"></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="ic_close_white_24px.svg" aria-label="Chiudi"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content
+                style="min-width:200px;min-height:200px;max-height:810px;padding-top: 50px;text-align: center;"
+                class="schedulazioni-content">
+            <p style="height: 50px;" id="schedulazioni-progress">
+                <md-progress-circular class="md-hue-2" md-diameter="30px"></md-progress-circular>
+            </p>
+            <p id="schedulazioni-work" class="md-body-2">Recupero le schedulazioni...</p>
+
+            <p style="display: none;" id="schedulazioni-error" class="md-body-2">Sto riscontrando dei problemi...<br>Se
+                persistono contatta l'amministratore.
+            </p>
+
+            <p style="display: none;" id="schedulazioni-errorM" class="md-body-2"></p>
+            <div class="table-responsive">
+                <table width="100%" id="schedulazioni-tab" class="table"
+                       style="display: none;text-align: left;">
+                    <thead>
+                    <tr id="schedulazioni-tab-h">
+                        <th>DESCRIZIONE</th>
+                        <th>COMANDO</th>
+                        <th>RICORRENZA</th>
+                        <th>ORARIO</th>
+                        <th>PERIODO</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()" style="">
+                Chiudi
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="pluto()" style="margin-right:20px;">
+                Crea schedulazione
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

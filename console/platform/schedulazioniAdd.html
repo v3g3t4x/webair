@@ -1,0 +1,183 @@
+<md-dialog aria-label="">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2 id="schedulazioni-add-device-name"></h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="ic_close_white_24px.svg" aria-label="Chiudi"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content
+                style="min-width:200px;min-height:200px;max-height:810px;padding-top: 50px;text-align: center;"
+                class="schedulazioni-add-content">
+            <p style="height: 50px;" id="schedulazioni-add-progress">
+                <md-progress-circular class="md-hue-2" md-diameter="30px"></md-progress-circular>
+            </p>
+            <p id="schedulazioni-add-work" class="md-body-2">Preparo la scheda...</p>
+
+            <p style="display: none;" id="schedulazioni-add-error" class="md-body-2">Sto riscontrando dei
+                problemi...<br>Se
+                persistono contatta l'amministratore.
+            </p>
+
+            <p style="display: none;" id="schedulazioni-add-errorM" class="md-body-2"></p>
+            <div id="schedulazione-add" style="display: none;padding-left: 50px;padding-right: 50px;">
+                <div class="row" style="border-bottom: 1px solid #ccc;">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <p>Ricorrenza</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <select id="ricorrenze-list" onchange="ricorrenzaChange(this);"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <!--<div class="col-xs-12 col-md-6">
+                        <p>Descrizione</p>
+                    </div>-->
+                    <div class="col-xs-12">
+                        <md-input-container class="md-block">
+                            <label>Descrivi la schedulazione</label>
+                            <textarea id="description" maxlength="70" md-select-on-focus md-no-asterisk
+                                      required></textarea>
+                        </md-input-container>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <p>Comando</p>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <select id="command-list" onchange="commandChange(this);">
+                        </select>
+                    </div>
+                </div>
+                <div class="row" id="giorni">
+                    <div class="col-xs-12 col-sm-4 col-md-6">
+                        <p>Giorni</p>
+                        <p><a href="#" onclick="$('.giorno_check').prop('checked', true);">Seleziona tutto</a></p>
+                        <p><a href="#" onclick="$('.giorno_check').prop('checked', false);">Deseleziona tutto</a></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-md-6" id="days-list"></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <p>Orario: dalle <input type="text" id="time-start" style="text-align: center"/></p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <p>alle <input type="text" id="time-end" style="text-align: center"/></p>
+                    </div>
+                </div>
+                <div class="row" id="time-end-first" style="display: none;">
+                    <div class="col-xs-12">
+                        <p style="color: red;">La schedulazione di
+                            spegnimento verr&agrave; eseguita il giorno seguente.</p>
+                    </div>
+                </div>
+                <div class="row" id="periodo">
+                    <div class="col-xs-12 col-md-6">
+                        <p>Periodo: dal <input type="text" id="date-start" style="text-align: center"/></p>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <p>al <input type="text" id="date-end" style="text-align: center"/></p>
+                    </div>
+                </div>
+                <div class="row" id="giorno">
+                    <div class="col-xs-12">
+                        <p>Il giorno <input type="text" id="date-single" style="text-align: center"/></p>
+                    </div>
+                </div>
+                <div class="row" id="shoutdown-end">
+                    <div class="col-xs-1">
+                        <input type="checkbox" style="margin: 10px;" id="check-off">
+                    </div>
+                    <div class="col-xs-11">
+                        <p onclick="$('#check-off').trigger('click');" style="cursor: pointer;">Al termine della schedulazione spengi tutto</p>
+                    </div>
+                </div>
+                <!--<table width="100%" id="schedulazione-add-table">
+
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td width="50%" style="padding-top: 20px;font-size: 18px;padding-left: 15px;">
+                            Ricorrenza:
+                        </td>
+                        <td style="padding-top: 20px;">
+                            <select id="ricorrenze-list" onchange="ricorrenzaChange(this);">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="50%" style="padding-top: 20px;font-size: 18px;padding-left: 15px;">
+                            Descrizione:
+                        </td>
+                        <td>
+                            <md-input-container class="md-block">
+                                <label>Descrivi la schedulazione</label>
+                                <textarea id="description" maxlength="150" rows="5" md-select-on-focus md-no-asterisk required></textarea>
+                            </md-input-container>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td width="50%" style="padding-top: 20px;font-size: 18px;padding-left: 15px;">Comando:
+                        </td>
+                        <td style="padding-top: 20px;">
+                            <select id="command-list" onchange="commandChange(this);">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr id="giorni">
+                        <td width="50%" style="padding-top: 20px;font-size: 18px;padding-left: 15px;">Giorni:
+                        </td>
+                        <td id="days-list"></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td colspan="2" style="padding-top: 20px;padding-left: 15px;">
+                            <p style="font-size: 18px;">
+                                Orario: dalle
+                                <input type="text" id="time-start" style="text-align: center"/>
+                                alle
+                                <input type="text" id="time-end" style="text-align: center"/>
+                            </p>
+                            <p id="time-end-first" style="display: none;color: red;">La schedulazione di
+                                spegnimento verr&agrave; eseguita il giorno seguente.</p>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;" id="periodo">
+                        <td colspan="2" style="padding-top: 20px;padding-left: 15px;">
+                            <p style="font-size: 18px;">
+                                Periodo: dal
+                                <input type="text" id="date-start" style="text-align: center"/>
+                                al
+                                <input type="text" id="date-end" style="text-align: center"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #ddd;" id="giorno">
+                        <td colspan="2" style="padding-top: 20px;padding-left: 15px;">
+                            <p style="font-size: 18px;">
+                                Il giorno
+                                <input type="text" id="date-single" style="text-align: center"/>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr id="shoutdown-end">
+                        <td colspan="2" style="padding-left: 15px;">
+                            <input type="checkbox" name="" style="margin: 10px;cursor: pointer;" id="check-off">
+                            Al termine della schedulazione spengi tutto
+                        </td>
+                    </tr>
+                </table>-->
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <md-button ng-click="cancel()" style="">
+                Chiudi
+            </md-button>
+            <span flex></span>
+            <md-button ng-click="pippo()" style="margin-right:20px;display: none;" id="schedulazione-add-button">
+                Crea
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
