@@ -60,20 +60,20 @@ if (isset($_GET['nameStatus'])) {
 
 
 //Recupero la stringa segreta di questo device..
-$secretValue = file_get_contents('/webair_support/secret_raspberry/secret.key', true);
+//$secretValue = file_get_contents('/webair_support/secret_raspberry/secret.key', true);
 
-echo "KEY--->".$secretValue;
+//echo "KEY--->".$secretValue;
 //Genero crypt concatenando uniqueId+deviceId+segreto
-$concatenazione=$uniqueId . $deviceId . $secretValue;
-echo "**".$concatenazione."**";
+//$concatenazione=$uniqueId . $deviceId . $secretValue;
+//echo "**".$concatenazione."**";
 //Aggiungo /n perchè la versione bash lo fa e quindi altrimenti non sarebbero gli stessi valori
-$cryptGenerato=hash('sha256', $concatenazione);
+//$cryptGenerato=hash('sha256', $concatenazione);
 
 
 //Comparo crypt ricevuto con crypt generato in locale...se uguale procedo...
 echo "\n\nCOMPARAZIONE\n";
-echo "VALORE GENERATO: ".$cryptGenerato."\n";
-echo "VALORE RICEVUTO: ".$crypt."\n";
+//echo "VALORE GENERATO: ".$cryptGenerato."\n";
+//echo "VALORE RICEVUTO: ".$crypt."\n";
 //if (strcmp($crypt, $cryptGenerato)==0) {
 	
 	$platform = 'WEB';
