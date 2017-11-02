@@ -1,0 +1,1 @@
+qui andranno i file lircd
