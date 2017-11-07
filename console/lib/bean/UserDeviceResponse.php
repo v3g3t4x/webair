@@ -7,6 +7,7 @@ class UserDeviceResponse {
     public $nameDevice=''; 
     public $description=''; 
     public $uniqueId='';
+    public $secretKey='';
 
 	
 }//End class...
