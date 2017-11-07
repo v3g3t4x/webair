@@ -14,7 +14,7 @@ function getUserDeviceList($username, $platform) {
 		$deviceList -> message = 'Parametri di input mancanti';
 	} else {
 		$link = GET_DB_CONNECTION();
-		$result = $link -> prepare("SELECT device.ID_DEVICE, device.NAME_DEVICE, device.DESCRIPTION, device.UNIQUE_WWW_ID, user_device.SECRET_KEY FROM WEBAIR_DB.AIR_USER user, WEBAIR_DB.AIR_USER_DEVICE user_device,  WEBAIR_DB.AIR_DEVICE device WHERE device.ID_DEVICE=user_device.ID_DEVICE and user.USERNAME=user_device.USERNAME and user.USERNAME=:username");
+		$result = $link -> prepare("SELECT device.ID_DEVICE, device.NAME_DEVICE, device.DESCRIPTION, device.UNIQUE_WWW_ID FROM WEBAIR_DB.AIR_USER user, WEBAIR_DB.AIR_USER_DEVICE user_device,  WEBAIR_DB.AIR_DEVICE device WHERE device.ID_DEVICE=user_device.ID_DEVICE and user.USERNAME=user_device.USERNAME and user.USERNAME=:username");
 		$result -> bindValue(':username', $username);
 		$result -> execute();
 		if (!$result) {
@@ -32,7 +32,7 @@ function getUserDeviceList($username, $platform) {
 					$userDeviceObj -> nameDevice = $row['NAME_DEVICE'];
 					$userDeviceObj -> uniqueId = $row['UNIQUE_WWW_ID'];
 					$userDeviceObj -> description = $row['DESCRIPTION'];
-					$userDeviceObj -> secretKey = $row['SECRET_KEY'];
+					
 					array_push($deviceList -> resultObj, $userDeviceObj);
 				}
 				$deviceList -> resultCode = 'OK';

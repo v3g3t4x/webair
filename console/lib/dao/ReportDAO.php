@@ -2,6 +2,7 @@
 include $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 include $_SERVER['DOCUMENT_ROOT'] . "/" . $dao_path . '/DBConnection.php';
 require $_SERVER['DOCUMENT_ROOT'] . "/" . $bean_path . '/Response.php';
+require $_SERVER['DOCUMENT_ROOT'] . "/" . $bean_path . '/ReportRow.php';
 
 
 function getReport($deviceId, $reportType, $platform) {
@@ -10,12 +11,12 @@ function getReport($deviceId, $reportType, $platform) {
 	$reportObj-> resultCode = 'KO';
 	$reportObj-> errorDescription = 'Generic Error';
 	
-	if (empty($deviceId) ||empty($reportType) |empty($platform)) {
-		$reportObj -> message = 'Parametri di input mancanti';
+	if (empty($deviceId) ||empty($reportType) ||empty($platform)) {
+		$reportObj -> message = 'Parametri di input mancanti '.$reportType;
 		$reportObj -> errorDescription = 'KO_INPUT_MANCANTI';
 	} else {
 		$link = GET_DB_CONNECTION();
-		$result = $link -> prepare("SELECT report.ID_REPORT, report.REPORT_TYPE, report.ID_DEVICE, report.VALUE, report.TIMESTAMP FROM WEBAIR_DB.AIR_REPORT report WHERE report.ID_DEVICE=:deviceId and report.REPORT_TYPE=:reportType order by report.TIMESTAMP asc");
+		$result = $link -> prepare("SELECT report.ID_REPORT as ID_REPORT, report.REPORT_TYPE, report.ID_DEVICE, report.VALUE, report.TIMESTAMP FROM WEBAIR_DB.AIR_REPORT report WHERE report.ID_DEVICE=:deviceId and report.REPORT_TYPE=:reportType order by report.TIMESTAMP asc");
 		$result->bindValue(':deviceId',  $deviceId);
 		$result->bindValue(':reportType',  $reportType);
 		$result -> execute();
@@ -25,12 +26,13 @@ function getReport($deviceId, $reportType, $platform) {
 		} else {
 			$num_rows = $result->rowCount();
 			if ($num_rows > 0) {
-				$row =$result->fetch(PDO::FETCH_ASSOC);
+				//$rows =$result->fetch(PDO::FETCH_ASSOC);
+				$rows = $result -> fetchAll();
 				$reportObj-> resultObj = array();
 				
 				foreach ($rows as $row) {
 					$reportRow = new ReportRow();
-					$reportRow -> idReport = $row['ID_REPORT'];
+					$reportRow->idReport = $row['ID_REPORT'];
 					$reportRow -> idDevice= $row['ID_DEVICE'];
 					$reportRow -> reportType= $row['REPORT_TYPE'];
 					$reportRow -> value= $row['VALUE'];
