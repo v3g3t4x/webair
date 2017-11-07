@@ -50,13 +50,12 @@ function getUserDeviceList($username, $platform) {
 
 
 
-function getSecretKeyForDevice($username, $deviceId, $platform) {
+function getSecretKeyForDevice($deviceId, $platform) {
 	$secretKeyOutput ='KO';
 	if (!empty($username) && !empty($platform) && !empty($deviceId)) {
 		$link = GET_DB_CONNECTION();	
-		$result = $link -> prepare("SELECT user_device.SECRET_KEY FROM WEBAIR_DB.AIR_USER_DEVICE user_device WHERE user_device.ID_DEVICE=:deviceId AND user_device.USERNAME=:username");
+		$result = $link -> prepare("SELECT device.SECRET_KEY FROM WEBAIR_DB.AIR_DEVICE device WHERE device.ID_DEVICE=:deviceId");
 		$result -> bindValue(':deviceId', $deviceId);
-		$result -> bindValue(':username', $username);
 		$result -> execute();
 		$num_rows = $result -> rowCount();
 		$deviceList -> resultObj = array();
