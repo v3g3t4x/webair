@@ -105,7 +105,7 @@ echo $jsonTable;
  <body>
   <div class="page-wrapper">
    <br />
-   <h2 align="center">Display Google Line Chart with JSON PHP & Mysql</h2>
+   <h2 align="center">Test grafico temperature</h2>
    <div id="line_chart" style="width: 100%; height: 500px"></div>
   </div>
  </body>
