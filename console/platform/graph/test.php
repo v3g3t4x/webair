@@ -1,44 +1,66 @@
 <?php
 //index.php
-$connect = mysqli_connect("localhost", "root", "", "fd3-Hm!Y");
+include $_SERVER['DOCUMENT_ROOT'].'/config.php';
+include $_SERVER['DOCUMENT_ROOT'] . "/" . $dao_path . '/DBConnection.php';
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$connect= GET_DB_CONNECTION();
 $query = '
-SELECT sensors_temperature_data, 
-UNIX_TIMESTAMP(CONCAT_WS(" ", sensors_data_date, sensors_data_time)) AS datetime 
-FROM tbl_sensors_data 
+SELECT  report.VALUE as sensors_temperature_data, report.TIMESTAMP as datetime
+FROM WEBAIR_DB.AIR_REPORT report 
+WHERE report.ID_DEVICE="DEVICE_TEST" and report.REPORT_TYPE="INTERNAL_TEMP" order by report.TIMESTAMP asc';
+
+$result = $connect-> prepare($query);
+/*
+$query = '
+SELECT sensors_temperature_data,
+UNIX_TIMESTAMP(CONCAT_WS(" ", sensors_data_date, sensors_data_time)) AS datetime
+FROM tbl_sensors_data
 ORDER BY sensors_data_date DESC, sensors_data_time DESC
 ';
-$result = mysqli_query($connect, $query);
+*/
+$result -> execute();
 $rows = array();
 $table = array();
 
 $table['cols'] = array(
  array(
-  'label' => 'Date Time', 
-  'type' => 'datetime'
+  'label' => 'datetime', 
+  'type' => 'string',
+  'pattern' => '',
+  'id'=>'datetime'
  ),
  array(
   'label' => 'Temperature (°C)', 
-  'type' => 'number'
+  'type' => 'number',
+  'pattern' => '',
+  'id'=>'datetime'
  )
 );
+$num_rows = $result->rowCount();
+echo "RISULTATI: " . $num_rows;
 
-while($row = mysqli_fetch_array($result))
+$rows = $result -> fetchAll();
+//while($row = mysqli_fetch_array($result))
+
+
+
+foreach ($rows as $row) 
 {
- $sub_array = array();
- $datetime = explode(".", $row["datetime"]);
- $sub_array[] =  array(
-      "v" => 'Date(' . $datetime[0] . '000)'
-     );
- $sub_array[] =  array(
-      "v" => $row["sensors_temperature_data"]
-     );
- $rows[] =  array(
-     "c" => $sub_array
-    );
+	$temp = array();
+	$temp[] = array('v' => $row['datetime']);
+	$temp[] = array('v' =>  $row['sensors_temperature_data']);
+	
+	$output[] = array('c' => $temp);
 }
-$table['rows'] = $rows;
-$jsonTable = json_encode($table);
 
+$table['rows'] = $output;
+$jsonTable = json_encode($table);
+echo $jsonTable;
 ?>
 
 
@@ -51,12 +73,20 @@ $jsonTable = json_encode($table);
    google.charts.setOnLoadCallback(drawChart);
    function drawChart()
    {
+	   /*
+	   var jsonData = $.ajax({
+	          url: "GetData.php",
+	          dataType: "json",
+	          async: false
+	          }).responseText;
+	          */
+    //var data = new google.visualization.DataTable(jsonData);
     var data = new google.visualization.DataTable(<?php echo $jsonTable; ?>);
 
     var options = {
      title:'Sensors Data',
      legend:{position:'bottom'},
-     chartArea:{width:'95%', height:'65%'}
+     chartArea:{width:'80%', height:'65%'}
     };
 
     var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
