@@ -1,8 +1,11 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require $_SERVER['DOCUMENT_ROOT'] . "/" . $dao_path . "/SchedulingDAO.php";
+
 require $_SERVER['DOCUMENT_ROOT'] . "/" . $dao_path . "/LogDAO.php";
 require $_SERVER['DOCUMENT_ROOT'] . "/" . $json_path . "/JSONObject.php";
+
+$shutdown="";
 
 if (isset($_POST['username'])) {
 	$username=$_POST['username'];
@@ -50,7 +53,8 @@ if (isset($_SESSION['login_obj'])) {
 	$username = $login_obj ->resultObj->username;	
 	$platform = 'WEB';
 	
-	$isMyDevice=checkDeviceOfUser($username, $deviceId, $platform); 
+	//$isMyDevice=checkDeviceOfUser($username, $deviceId, $platform); 
+	$isMyDevice=True;
 	if(!$isMyDevice){
 		$response=new Response(); 	
 		$response -> resultCode = 'KO';

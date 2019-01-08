@@ -191,10 +191,11 @@ function saveNewScheduling($username,$deviceId,$commandId,$schedulingType,$sched
 		$schedulingNew -> message = 'Parametri di input mancanti';
 	} else {
 		$link = GET_DB_CONNECTION();
-		
+				$link->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 		
 //		if(strcmp($shutdown,"true") != 0){
 			$result = $link -> prepare("insert into WEBAIR_DB.AIR_SCHEDULING(USERNAME,DEVICE_ID,ID_COMMAND,SCHEDULING_TYPE,SCHEDULING_VALUE,START_TIME,END_TIME,VALIDITY_RANGE_START,VALIDITY_RANGE_END,PRIORITY,DESCRIPTION, IS_ENABLED)  values(:username,:deviceId,:commandId,:schedulingType,:schedulingValue,:startTime,:endTime,:validityStart,:validityEnd,:priority,:description,'1');");			
+			//print_r($result);s
 	//	}else{
 		//	if(strcmp($startTime, $endTime)>0){//Data start > data end
 			//	$result = $link -> prepare("insert into WEBAIR_DB.AIR_SCHEDULING(USERNAME,DEVICE_ID,ID_COMMAND,SCHEDULING_TYPE,SCHEDULING_VALUE,START_TIME,END_TIME,VALIDITY_RANGE_START,VALIDITY_RANGE_END,PRIORITY,DESCRIPTION, IS_ENABLED)  values(:username,:deviceId,:commandId,:schedulingType,:schedulingValue,:startTime,:endTime,ADDDATE(:validityStart, INTERVAL 1 DAY),ADDDATE(:validityEnd, INTERVAL 1 DAY),:priority,:description,'1');");				
@@ -233,8 +234,9 @@ function saveNewScheduling($username,$deviceId,$commandId,$schedulingType,$sched
 				$schedulingNew -> message = 'Schedulazione correttamente salvata';
 			}else{
 				$schedulingNew -> resultCode = 'KO';
-				$schedulingNew -> errorDescription = 'KO_SCHEDULING_NOT_FOUND';
-				$schedulingNew -> message = 'Errore nel salvataggio della nuova schedulazione';
+				$schedulingNew -> errorDescription = 'KO_SCHEDULING_NOT_FOUND2';
+				$schedulingNew -> message = 'Errore nel salvataggio della nuova schedulazione '. $num_rows;
+				print_r($link->errorInfo());
 			}//Enf if...
 		}	
 	}

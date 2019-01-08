@@ -259,7 +259,7 @@ include $Common->Get_Language();
                     var p222 = document.createElement("p");
                     p222.setAttribute("class", "device-data");
                     p222.setAttribute("style", "background-color: lavender;");
-                    p222.appendChild(document.createTextNode("DESCRIZIONE: " + row.description));
+                    p222.appendChild(document.createTextNode("" + row.description));
                     var p2222 = document.createElement("p");
                     p2222.setAttribute("class", "device-data");
                     p2222.setAttribute("style", "background-color: whitesmoke;");
@@ -287,13 +287,13 @@ include $Common->Get_Language();
                     d1111.setAttribute("class", "row");
                     d1111.setAttribute("id", "pippo");
                     d1111.setAttribute("ng-controller", "DIALOG");
-
+                    
                     var d3 = document.createElement("div");
                     d3.setAttribute("class", "col-xs-6 col-sm-4 col-md-3 text-center");
                     $(d3).html("<md-button class='md-raised md-primary' ng-click='showStatusDialog($event," + i + ")'>STATUS</md-button>");
-                    //var d33 = document.createElement("div");
-                    //d33.setAttribute("class", "col-xs-6 col-sm-4 col-md-2 text-center");
-                    // $(d33).html("<md-button class='md-raised md-warn' ng-click='showTelecomandoDialog($event," + i + ")'>TELECOMANDO</md-button>");
+                    var d33 = document.createElement("div");
+                    d33.setAttribute("class", "col-xs-6 col-sm-4 col-md-3 text-center");
+                    $(d33).html("<md-button class='md-raised md-warn' ng-click='showTelecomandoDialog($event," + i + ")'>TELECOMANDO</md-button>");
                     var d333 = document.createElement("div");
                     d333.setAttribute("class", "col-xs-6 col-sm-4 col-md-3 text-center");
                     $(d333).html("<md-button class='md-raised md-warn' ng-click='showWebcamDialog($event," + i + ")'>WEBCAM</md-button>");
@@ -308,10 +308,10 @@ include $Common->Get_Language();
                     //$(d333333).html("<md-button class='md-raised md-warn'>AMMINISTRA</md-button>");
 
                     d1111.appendChild(d3);
-                    //d1111.appendChild(d33);
+                    d1111.appendChild(d33);
                     d1111.appendChild(d333);
                     d1111.appendChild(d3333);
-                    d1111.appendChild(d33333);
+                    //d1111.appendChild(d33333);
                     //d1111.appendChild(d333333);
                     body.append(d1111);
 
@@ -620,11 +620,11 @@ include $Common->Get_Language();
 
                     for (var i = 0; i < json.resultObj.length; i++) {
                         var row = json.resultObj[i];
-
+                       
                         var tab = row.mediaType == "WEBCAM_PHOTO" ? "webcam-tab-photo" : "webcam-tab-video";
                         row.mediaType == "WEBCAM_PHOTO" ? foto++ : video++;
                         //var tab = "WEBCAM_PHOTO";
-
+                        
                         var li = document.createElement("li");
                         li.setAttribute("class", "list-group-item");
                         var a = document.createElement("a");
@@ -641,6 +641,7 @@ include $Common->Get_Language();
                         p.appendChild(document.createTextNode("(" + row.mediaTimeStamp + ")"));
 
                         li.appendChild(p);
+                        
                         try {
                             document.getElementById(tab).appendChild(li);
                         }
@@ -648,7 +649,7 @@ include $Common->Get_Language();
                             continue;
                         }
                     }
-
+                    
                     if (foto == 0) {
                         var li = document.createElement("li");
                         li.setAttribute("class", "list-group-item");
@@ -659,8 +660,9 @@ include $Common->Get_Language();
 
                         document.getElementById("webcam-tab-photo").appendChild(li);
                     }
-
+               
                     if (video == 0) {
+                        
                         var li = document.createElement("li");
                         li.setAttribute("class", "list-group-item");
                         var h4 = document.createElement("h4");
@@ -668,7 +670,7 @@ include $Common->Get_Language();
                         h4.appendChild(document.createTextNode("Non ci sono video"));
                         li.appendChild(h4);
 
-                        //document.getElementById("webcam-tab-video").appendChild(li);
+                        document.getElementById("webcam-tab-video").appendChild(li);
                     }
 
                     $(".webcam-content").css("padding-top", "");//.css("text-align", "");

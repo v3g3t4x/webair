@@ -6,6 +6,6 @@ Naturalmente qui ospitiamo il software che permette il funzionamento di webpelle
 Potete trovare tutte le informazioni per il montaggio passo passo nel nuovo Blog.
 Vengono pubblicati regolarmente degli articoli che spiegano passo passo come costruire il vostro WebPellet.
 
-Il sito è: http://www.webpellet.com
+Il sito è: http://webpellet.com
 
 

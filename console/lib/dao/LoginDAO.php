@@ -14,6 +14,8 @@ function checkLogin($username, $password, $platform) {
 		$userObj -> message = 'Parametri di input mancanti';
 	} else {//Se i parametri non sono vuoti...
 		$link = GET_DB_CONNECTION();
+		
+
 		$result = $link->prepare("select user.USERNAME, user.NOME, user.COGNOME, user.RUOLO, user.LATEST_ACCESS FROM WEBAIR_DB.AIR_USER user WHERE user.USERNAME=:username and user.PASSWORD=:password and user.IS_ENABLED=1");
 		$result->bindValue(':username', $username);
 		$result->bindValue(':password',  $password);
