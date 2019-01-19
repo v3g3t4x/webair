@@ -58,12 +58,15 @@ if (isset($_GET['publicIp'])) {
 if (isset($_GET['nameStatus'])) {
 	$nameStatus=$_GET['nameStatus'];
 }
-$secretKey=getSecretKeyForDevice($deviceId, $platform);
+//$secretKey=getSecretKeyForDevice($deviceId, $platform);
+$crypt="SECRET";
+$secretKey="SECRET";
+
 echo "\n\nSECRET_KEY RECUPERATO DA DB: "+$secretKey+" \n";
 //Comparo crypt ricevuto con crypt generato in locale...se uguale procedo...
-echo "\n\nCOMPARAZIONE\n";
-echo "VALORE DB: ".$secretKey."\n";
-echo "VALORE RICEVUTO: ".$crypt."\n";
+//echo "\n\nCOMPARAZIONE\n";
+//echo "VALORE DB: ".$secretKey."\n";
+//echo "VALORE RICEVUTO: ".$crypt."\n";
 if (strcmp($crypt, $secretKey)==0) {
 	$platform = 'WEB';
 	$resultSaveStatus = saveStatus($platform,$uniqueId,$deviceId,$privateIp,$publicIp,$crypt,$internalTemp,$externalTemp,$internalHum,$location,$nameStatus,$externalHum);

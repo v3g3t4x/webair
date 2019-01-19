@@ -24,7 +24,7 @@ session_start();
 //if (isset($_SESSION['login_obj'])) {
 	//$login_obj = unserialize($_SESSION['login_obj']);
 	//$username = $login_obj ->resultObj->username;
-$username='accardi.marco@gmail.com';
+$username='demo';
 	$platform = 'WEB';
 	$reportObj=getReport($deviceId, $reportType, $platform);
 	saveNewLog("API","GetReport",$username,$platform,$deviceId);

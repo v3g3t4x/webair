@@ -1,6 +1,6 @@
 # WEBAIR (la piattaforma alla base di WEBPELLET)
 Benvenuti! 
-WebAir è il solo ed unico CONTROLLO WEB PER STUFE A PELLET!
+WebAir è il solo ed unico CONTROLLO WEB PER STUFE E CALDAIE A PELLET!
 
 Naturalmente qui ospitiamo il software che permette il funzionamento di webpellet.
 Potete trovare tutte le informazioni per il montaggio passo passo nel nuovo Blog.
